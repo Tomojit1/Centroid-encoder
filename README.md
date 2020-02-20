@@ -10,7 +10,8 @@ Requirements:
 
 
 Notes: 
-1. Two datasets: USPS and MNIST are given with the package.
+1. The USPS file is given with the package.
+2. The data file is a pickle object which is zipped. No need to unzip as the code will take care of it.
 2. 'CEVisualizer.py' requires command line argument.
 3. The script runs with default dataset 'USPS' when no argument is passed.
 
