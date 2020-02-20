@@ -18,7 +18,6 @@ import scipy.spatial as sp
 import random
 from operator import itemgetter
 import pickle
-import pdb
 
 def getApplicationData(dataSetName,nSamplePerClass=0):
 
