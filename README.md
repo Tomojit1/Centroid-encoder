@@ -18,11 +18,11 @@ Notes:
 How to run the code:
 1. Download the code.
 2. Make sure all the requirements are satisfied.
-3. Run the script with default mode: From command like:
+3. Run the script with default mode: Run the command from command line:
 	python CEVisualizer.py
-4. Run the script with argument: From command like:
+4. Run the script with argument: Run the following command from command line:
 	python CEVisualizer.py MNIST
-5. To run the script from ipython us the commands:
+5. To run the script from ipython run the commands:
 	a. run CEVisualizer.py <= default mode
 	b. run CEVisualizer.py MNIST <= with argument
 
