@@ -18,24 +18,32 @@ import scipy.spatial as sp
 import random
 from operator import itemgetter
 import pickle
+import pdb
 
 def getApplicationData(dataSetName,nSamplePerClass=0):
 
 	if dataSetName.upper()=='MNIST':
-		trFile,trLabelFile = './DataFile/MNIST/MNISTTrainData_Org.p','./DataFile/MNIST/MNISTTrainLabel_Org.p'
-		trData,trLabels = pickle.load(open(trFile,'rb')),pickle.load(open(trLabelFile,'rb'))
+		
+		from torchvision import datasets, transforms
+		trSet = datasets.MNIST('./data', train=True, download=True)
+		trLabels = trSet.targets.numpy().reshape(-1,1)
+		tstSet = datasets.MNIST('./data', train=False, download=True)
+		tstLabels = tstSet.targets.numpy().reshape(-1,1)
+		trData = trSet.data.numpy().reshape(60000,784)
+		tstData = tstSet.data.numpy().reshape(10000,784)
 
 		lTrData = np.hstack((trData,trLabels))
 		trData,trLabels=makeStratifiedSubset(lTrData,nSamplePerClass)
-	    
-		testFile,testLabelFile = './DataFile/MNIST/MNISTTestData_Org.p','./DataFile/MNIST/MNISTTestLabel_Org.p'
-		tstData,tstLabels = pickle.load(open(testFile,'rb')),pickle.load(open(testLabelFile,'rb'))
+
 		lTstData = np.hstack((tstData,tstLabels))
-		tstData,tstLabels=makeStratifiedSubset(lTstData,nSamplePerClass)
+		tstData,tstLabels = makeStratifiedSubset(lTstData,nSamplePerClass)
 
 	else: #for USPS data
-		labeledDataFile = './DataFile/USPS/USPS.p'
-		labeledData = pickle.load(open(labeledDataFile,'rb'))
+		from zipfile import ZipFile
+		fileName = './DataFile/USPS.zip'
+		with ZipFile(fileName, 'r') as zip:
+			zip.extractall()
+		labeledData = pickle.load(open('USPS.p','rb'))
 		trData,trLabels = labeledData[:,:-1],labeledData[:,-1].reshape(-1,1)
 		tstData,tstLabels=[],[]
 
