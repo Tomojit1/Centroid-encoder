@@ -88,7 +88,7 @@ def standardizeData(data,mu=[],std=[]):
 	#data: a m x n matrix where m is the no of observations and n is no of features
 	#if any(mu) == None and any(std) == None:
 	if not(len(mu) and len(std)):
-		#pdb.set_trace()
+		
 		std = np.std(data,axis=0)
 		mu = np.mean(data,axis=0)
 		std[np.where(std==0)[0]] = 1.0 #This is for the constant features.
@@ -218,7 +218,7 @@ def display2DDataTrTst(trData,trCentroids,trAnnotation,tstData,tstAnnotation,dat
 	vorTr = sp.Voronoi(trCentroids)
 	sp.voronoi_plot_2d(vorTr, show_vertices=False, line_colors='orange',line_width=1, line_alpha=0.6, point_size=5,ax=ax[0])
 	group = []
-	#pdb.set_trace()
+	
 	for i in range(len(trAnnotation)):	   
 		if(int(trAnnotation[i,0]) not in group):
 			if trAnnotation[i,2] == '+':
@@ -258,10 +258,12 @@ def display2DDataTrTst(trData,trCentroids,trAnnotation,tstData,tstAnnotation,dat
 	ax[1].set_xticklabels([])
 
 	if dataSetName.upper() in ['MNIST','USPS']:
-		plt.legend(loc='upper center', bbox_to_anchor=(0.0005, -0.0025),ncol=10, fancybox=False, shadow=False,fontsize=15)
-		#plt.legend(bbox_to_anchor=(0.00025, 1.65),ncol=1, fancybox=False, shadow=False,fontsize=15)
+		#plt.legend(loc='upper center', bbox_to_anchor=(0.0005, -0.0025),ncol=10, fancybox=False, shadow=False,fontsize=15)
+		plt.legend(loc='lower center',bbox_to_anchor=(-0.1, -0.125),ncol=10, fancybox=False, shadow=False,fontsize=15)
+
 	else:
 		plt.legend(loc='upper right',fontsize=15)
+	fig.set_size_inches(13.5, 5.5)
 	plt.plot()
 	plt.show()
 

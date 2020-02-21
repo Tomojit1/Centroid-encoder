@@ -12,7 +12,6 @@
 # not been tested to the degree that would be advisable in any important
 # application.  All use of these programs is entirely at the user's own risk.
 
-import pdb
 import numpy as np
 import sys
 from utilityScript import *
